@@ -1,12 +1,20 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Math; 
 
 class Figure{
-	private Point[] coords;
+	protected List<Point> coords = new ArrayList<>();
 	
-	public void getCoords(); 
-	public void addPoint(Point);
-	//добавление точек в масиив coords
-	public void rotateFigure();
+	public void getCoords(){}; 
+	public void rotateFigure(double angleOFrotation){
+		rotateFigure(angleOFrotation, new Point(0.0,0.0));
+	}	
+	public void rotateFigure(double angleOFrotation, Point b){
+		for(Point point:coords){
+			point.rotate(angleOFrotation, b);
+		}
+	}
 }
 
 class Point{
@@ -17,12 +25,16 @@ class Point{
 		this.x = x;
 		this.y = y;
 	}
-	public void rotate(){
-	//x = x*cos(angle) - y*sin(angle)
-	//y = x*sin(angle) + y*cos(angle)
+	public void rotate(double a, Point b){
+		double x,y;
+		a = Math.toRadians(a);
+		x = (this.x-b.x)*Math.cos(a) - (this.y-b.y)*Math.sin(a);
+		y = (this.x-b.x)*Math.sin(a) + (this.y-b.y)*Math.cos(a);
+		this.x = Math.round(x+b.x);
+		this.y = Math.round(y+b.y);
 	}
 }
-
+/*
 class Rectangle extends Figure {
 	
 	private int[] coords = new int[4];
@@ -54,7 +66,7 @@ class Ellipse extends Figure{
 		center 
 	}
 }
-
+*/
 class Circle extends Figure{
 	
 	private double radius;
@@ -62,17 +74,21 @@ class Circle extends Figure{
 	
 	Circle(){}	
 	Circle(Point point, double radius) {
-		
+		coords.add(point);
+		this.radius = radius;
 	}
 	
 	public void getCoords() {
-		System.out.print("x:"+coords[0]);
-		System.out.print(" y:"+coords[1]);
-		System.out.println();
+		for(Point point:coords){
+			System.out.println("Coords:");
+			System.out.print("x: "+point.x);
+			System.out.println(", y: "+point.y);
+		}
 	}
 	
 	public void getRadius(){
-		System.out.print("Radius: "+radius);
+		System.out.print("Radius:\n"+radius);
+		System.out.println();
 	}
 }
 
@@ -80,17 +96,18 @@ class Circle extends Figure{
 public class Main{
 	
 	public static void main(String[] args) {
-		
+		/*
 		int[] rec_coord = new int[] {0,0,10,5}; // x1,y1,x2,y2 левая нижняя точка, верхняя правая точка
 		Rectangle a = new Rectangle(rec_coord);
 		a.getCoords();
+		*/
 		
-		int[] cir_coord = new int[] {0,0};
 		double cir_radius = 2.5;
-		Circle b = new Circle(new Point(x,y), cir_radius);
+		Circle b = new Circle(new Point(100.0,300.0), cir_radius);
 		b.getCoords();
 		b.getRadius();
-		
+		b.rotateFigure(-45.0,new Point(100.0,100.0));
+		b.getCoords();
 	}
 	
 }
