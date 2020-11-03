@@ -79,10 +79,10 @@ class Circle extends Figure{
 	}
 	
 	public void getCoords() {
+		System.out.println("Coords:");
 		for(Point point:coords){
-			System.out.println("Coords:");
 			System.out.print("x: "+point.x);
-			System.out.println(", y: "+point.y);
+			System.out.println(" | y: "+point.y);
 		}
 	}
 	
@@ -93,21 +93,50 @@ class Circle extends Figure{
 }
 
 
+class Rectangle extends Figure{
+	
+	Rectangle(){}
+	Rectangle(Point point1, Point point2){
+		/*
+		написать фун-цию, к-рая будет рассчитывать
+		остальные две точки, и отправлять в конструктор
+		для 4х точек
+		*/
+	}
+	Rectangle(Point point1, Point point2, Point point3, Point point4){
+		coords.add(point1);
+		coords.add(point2);
+		coords.add(point3);
+		coords.add(point4);
+	}
+	
+	
+	public void getCoords() {
+		System.out.println("Coords:");
+		for(Point point1:coords){
+			//System.out.println("Top Left:");
+			System.out.print("x: "+ point1.x);
+			System.out.println(" | y: "+ point1.y);
+		}
+	}
+	
+}
+
+
 public class Main{
 	
 	public static void main(String[] args) {
-		/*
-		int[] rec_coord = new int[] {0,0,10,5}; // x1,y1,x2,y2 левая нижняя точка, верхняя правая точка
-		Rectangle a = new Rectangle(rec_coord);
+		Rectangle a = new Rectangle(new Point(0.0, 10.0), new Point(10.0, 0.0));
 		a.getCoords();
-		*/
 		
+		/* Работает
 		double cir_radius = 2.5;
 		Circle b = new Circle(new Point(100.0,300.0), cir_radius);
 		b.getCoords();
 		b.getRadius();
 		b.rotateFigure(-45.0,new Point(100.0,100.0));
 		b.getCoords();
+		*/
 	}
 	
 }
