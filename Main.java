@@ -10,11 +10,13 @@ class Figure{
 	public void rotateFigure(double angleOFrotation){
 		rotateFigure(angleOFrotation, new Point(0.0,0.0));
 	}	
-	public void rotateFigure(double angleOFrotation, Point b){
+	// поворот относительно точки b
+	public void rotateFigure(double angleOFrotation, Point b){ 
 		for(Point point:coords){
 			point.rotate(angleOFrotation, b);
 		}
 	}
+	//public void areaFigure()
 }
 
 class Point{
@@ -34,39 +36,7 @@ class Point{
 		this.y = Math.round(y+b.y);
 	}
 }
-/*
-class Rectangle extends Figure {
-	
-	private int[] coords = new int[4];
-	
-	
-	Rectangle(){}	
-	Rectangle(int[] coords) {
-		this.coords = coords;
-	}
-	
-	public void getCoords() {
-		System.out.print("x1,y1,x2,y2\n");
-		for(int num: coords) System.out.print(num+" ");
-		System.out.println();
-	}
-}
 
-class Ellipse extends Figure{
-	
-	private center;
-	private double b;
-	
-	public void getCoords() {
-		for(int num: coords) System.out.print(num+" ");
-		System.out.println();
-	}
-	
-	public void setCenter(Point center){
-		center 
-	}
-}
-*/
 class Circle extends Figure{
 	
 	private double radius;
@@ -97,11 +67,12 @@ class Rectangle extends Figure{
 	
 	Rectangle(){}
 	Rectangle(Point point1, Point point2){
-		/*
-		написать фун-цию, к-рая будет рассчитывать
-		остальные две точки, и отправлять в конструктор
-		для 4х точек
-		*/
+		/* этот конструктор рассчитывает остальные 2 точки,
+		и отправляет в другой конструктор 4 точки
+			1--4
+			|  |
+			3--2 */
+		this(point1, point2, new Point(point1.x, point2.y), new Point(point2.x, point1.y));
 	}
 	Rectangle(Point point1, Point point2, Point point3, Point point4){
 		coords.add(point1);
@@ -112,12 +83,14 @@ class Rectangle extends Figure{
 	
 	
 	public void getCoords() {
+		int counter = 0;
 		System.out.println("Coords:");
 		for(Point point1:coords){
-			//System.out.println("Top Left:");
-			System.out.print("x: "+ point1.x);
+			System.out.print("Point"+ ++counter);
+			System.out.print(" x: "+ point1.x);
 			System.out.println(" | y: "+ point1.y);
 		}
+		System.out.println("\t1--4 \n\t|  | \n\t3--2"); // символьное описание точек прямоугольника
 	}
 	
 }
