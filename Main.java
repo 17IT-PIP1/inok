@@ -16,7 +16,11 @@ class Figure{
 			point.rotate(angleOFrotation, b);
 		}
 	}
-	//public void areaFigure()
+	public double areaFigure(){
+		double sum = 0;
+		for(Point point:coords) sum+=(point.x)*(point.y);		
+		return sum;
+	}
 }
 
 class Point{
@@ -40,7 +44,6 @@ class Point{
 class Circle extends Figure{
 	
 	private double radius;
-	
 	
 	Circle(){}	
 	Circle(Point point, double radius) {
@@ -81,7 +84,6 @@ class Rectangle extends Figure{
 		coords.add(point4);
 	}
 	
-	
 	public void getCoords() {
 		int counter = 0;
 		System.out.println("Coords:");
@@ -101,8 +103,9 @@ public class Main{
 	public static void main(String[] args) {
 		Rectangle a = new Rectangle(new Point(0.0, 10.0), new Point(10.0, 0.0));
 		a.getCoords();
+		System.out.println("Area: " + a.areaFigure());
 		
-		/* Работает
+		/* поворот окружности
 		double cir_radius = 2.5;
 		Circle b = new Circle(new Point(100.0,300.0), cir_radius);
 		b.getCoords();
